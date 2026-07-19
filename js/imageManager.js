@@ -1,7 +1,10 @@
 export class ImageManager {
 
     constructor() {
+
         this.images = [];
+        this.lastIndex = -1;
+
     }
 
     async load() {
@@ -14,10 +17,24 @@ export class ImageManager {
 
     getRandomImage() {
 
-    const index = Math.floor(Math.random() * this.images.length);
+        if (this.images.length === 1) {
 
-    return "./images/hands/" + this.images[index];
+            return "./images/hands/" + this.images[0];
 
-}
+        }
+
+        let index;
+
+        do {
+
+            index = Math.floor(Math.random() * this.images.length);
+
+        } while (index === this.lastIndex);
+
+        this.lastIndex = index;
+
+        return "./images/hands/" + this.images[index];
+
+    }
 
 }
