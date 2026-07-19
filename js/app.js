@@ -1,6 +1,7 @@
 import { State } from "./state.js";
 import { UI } from "./ui.js";
 import { ImageManager } from "./imageManager.js";
+import { Timer } from "./timer.js";
 
 class App {
 
@@ -9,6 +10,7 @@ class App {
     this.ui = new UI();
     this.state = new State();
     this.imageManager = new ImageManager();
+    this.timer = new Timer();
 
 }
 
@@ -51,13 +53,26 @@ class App {
     // 画像を表示
     this.ui.showPractice(image);
 
-    document
-        .getElementById("finishButton")
-        .addEventListener("click", () => {
+this.timer.start(
 
-            this.showFinish();
+    this.state.seconds,
 
-        });
+    (time) => {
+
+        this.ui.updateTimer(time);
+
+    },
+
+    () => {
+
+        this.showFinish();
+
+    }
+
+);
+
+document
+    .getElementById("finishButton")
 
     document
         .getElementById("backButton")

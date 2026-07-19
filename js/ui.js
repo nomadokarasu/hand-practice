@@ -20,6 +20,12 @@ export class UI {
 
 }
 
+updateTimer(time) {
+
+    document.querySelector(".timer span").textContent = time.toFixed(1);
+
+}
+
     showFinish() {
         this.app.innerHTML = finishView();
     }
