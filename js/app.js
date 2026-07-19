@@ -1,13 +1,14 @@
 import { State } from "./state.js";
 import { UI } from "./ui.js";
+import { ImageManager } from "./imageManager.js";
 
 class App {
 
     constructor() {
 
     this.ui = new UI();
-
     this.state = new State();
+    this.imageManager = new ImageManager();
 
 }
 
@@ -39,27 +40,34 @@ class App {
 
     }
 
-    showPractice() {
+    async showPractice() {
 
-        this.ui.showPractice();
+    // images.json を読み込む
+    await this.imageManager.load();
 
-        document
-            .getElementById("finishButton")
-            .addEventListener("click", () => {
+    // 最初の画像を取得
+    const image = this.imageManager.getRandomImage();
 
-                this.showFinish();
+    // 画像を表示
+    this.ui.showPractice(image);
 
-            });
+    document
+        .getElementById("finishButton")
+        .addEventListener("click", () => {
 
-        document
-            .getElementById("backButton")
-            .addEventListener("click", () => {
+            this.showFinish();
 
-                this.showHome();
+        });
 
-            });
+    document
+        .getElementById("backButton")
+        .addEventListener("click", () => {
 
-    }
+            this.showHome();
+
+        });
+
+}
 
     showFinish() {
 

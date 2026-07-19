@@ -9,9 +9,11 @@ export function practiceView() {
 
             <section class="image-area">
 
-                <div class="image-placeholder">
-                    画像表示エリア
-                </div>
+                <img
+    id="practiceImage"
+    class="practice-image"
+    src=""
+    alt="練習画像">
 
             </section>
 

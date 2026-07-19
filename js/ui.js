@@ -12,9 +12,13 @@ export class UI {
         this.app.innerHTML = homeView();
     }
 
-    showPractice() {
-        this.app.innerHTML = practiceView();
-    }
+    showPractice(imagePath) {
+
+    this.app.innerHTML = practiceView();
+
+    document.getElementById("practiceImage").src = imagePath;
+
+}
 
     showFinish() {
         this.app.innerHTML = finishView();
