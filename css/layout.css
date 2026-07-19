@@ -1,0 +1,85 @@
+body{
+
+    margin:0;
+
+    background:#202124;
+
+    color:white;
+
+    font-family:
+        "Yu Gothic UI",
+        sans-serif;
+
+}
+
+.container{
+
+    max-width:500px;
+
+    margin:auto;
+
+    padding:30px;
+
+}
+
+.card{
+
+    background:#303134;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+label{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+input{
+
+    font-size:20px;
+
+    padding:10px;
+
+}
+
+button{
+
+    font-size:22px;
+
+    padding:15px;
+
+    cursor:pointer;
+
+}
+
+.ad{
+
+    margin-top:30px;
+
+    border:2px dashed gray;
+
+    padding:40px;
+
+    text-align:center;
+
+}
+
+.subtitle{
+
+    color:#bbbbbb;
+
+}
