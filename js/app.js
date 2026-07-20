@@ -89,33 +89,82 @@ this.ui.updateProgress(
     this.state.count
 );
 
-this.timer.start(
+const practiceImage =
+    document.getElementById("practiceImage");
 
-    this.state.seconds,
+const countdown =
+    document.getElementById("countdown");
 
-    (time) => {
+const pauseButton =
+    document.getElementById("pauseButton");
 
-        this.ui.updateTimer(time);
+practiceImage.hidden = true;
 
-    },
+countdown.hidden = false;
 
-    () => {
+pauseButton.disabled = true;
 
-    if (this.state.currentIndex >= this.state.count) {
+let countdownValue = 3;
 
-        this.showFinish();
+countdown.textContent = countdownValue;
+
+const countdownTimer = setInterval(() => {
+
+    if (!countdown.isConnected) {
+
+        clearInterval(countdownTimer);
 
         return;
 
     }
 
-    this.state.currentIndex++;
+    countdownValue--;
 
-    this.nextImage();
+    if (countdownValue > 0) {
 
-}
+        countdown.textContent = countdownValue;
 
-);
+        return;
+
+    }
+
+    clearInterval(countdownTimer);
+
+    countdown.hidden = true;
+
+    practiceImage.hidden = false;
+
+    pauseButton.disabled = false;
+
+    this.timer.start(
+
+        this.state.seconds,
+
+        (time) => {
+
+            this.ui.updateTimer(time);
+
+        },
+
+        () => {
+
+            if (this.state.currentIndex >= this.state.count) {
+
+                this.showFinish();
+
+                return;
+
+            }
+
+            this.state.currentIndex++;
+
+            this.nextImage();
+
+        }
+
+    );
+
+}, 1000);
 
 document
     .getElementById("backButton")
@@ -178,6 +227,15 @@ handleKeydown(event) {
         document.getElementById("pauseButton");
 
     if (!pauseButton) {
+
+        return;
+
+    }
+
+    const countdown =
+        document.getElementById("countdown");
+
+    if (countdown && !countdown.hidden) {
 
         return;
 
