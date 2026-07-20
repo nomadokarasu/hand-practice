@@ -20,29 +20,16 @@ class App {
 
     }
 
-    showHome() {
+    
+    startPractice() {
 
-        this.ui.showHome();
+    this.state.currentIndex = 1;
 
-        document
-.getElementById("startButton")
-.addEventListener("click", () => {
+    this.state.isPaused = false;
 
-    this.state.seconds =
-        Number(document.getElementById("seconds").value);
+    this.showPractice();
 
-    this.state.count =
-    Number(document.getElementById("count").value);
-
-this.state.currentIndex = 1;
-
-console.log(this.state);
-
-this.showPractice();
-
-});
-
-    }
+}
 
     async showPractice() {
 
@@ -199,9 +186,7 @@ this.ui.updateCounter(
     .getElementById("retryButton")
     .addEventListener("click", () => {
 
-        this.state.currentIndex = 1;
-
-        this.showPractice();
+        this.startPractice();
 
     });
 
