@@ -111,3 +111,31 @@ button{
     transition: width 0.2s linear;
 
 }
+
+.image-area {
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+.countdown {
+
+    position: absolute;
+
+    z-index: 10;
+
+    font-size: 96px;
+
+    font-weight: bold;
+
+    color: white;
+
+    text-shadow: 0 0 12px black;
+
+}

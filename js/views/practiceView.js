@@ -7,13 +7,20 @@ export function practiceView() {
                 <button id="pauseButton">⏸ 一時停止</button>
             </div>
 
-            <section class="image-area">
+                        <section class="image-area">
+
+                <div
+                    id="countdown"
+                    class="countdown"
+                    hidden>
+                    3
+                </div>
 
                 <img
-    id="practiceImage"
-    class="practice-image"
-    src=""
-    alt="練習画像">
+                    id="practiceImage"
+                    class="practice-image"
+                    src=""
+                    alt="練習画像">
 
             </section>
 

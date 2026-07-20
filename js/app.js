@@ -12,13 +12,20 @@ class App {
     this.imageManager = new ImageManager();
     this.timer = new Timer();
 
+    this.handleKeydown = this.handleKeydown.bind(this);
+
 }
 
     init() {
 
-        this.showHome();
+    document.addEventListener(
+        "keydown",
+        this.handleKeydown
+    );
 
-    }
+    this.showHome();
+
+}
 
     showHome() {
 
@@ -53,6 +60,8 @@ class App {
 
     this.state.isPaused = false;
 
+    this.imageHistory = [];
+
     this.showPractice();
 
 }
@@ -65,6 +74,8 @@ class App {
 
 // 最初の画面を表示
 const image = this.imageManager.getRandomImage();
+
+this.imageHistory[0] = image;
 
 this.ui.showPractice(image);
 
@@ -161,6 +172,69 @@ document
 
 }
 
+handleKeydown(event) {
+
+    const pauseButton =
+        document.getElementById("pauseButton");
+
+    if (!pauseButton) {
+
+        return;
+
+    }
+
+    if (event.code === "Space") {
+
+        event.preventDefault();
+
+        pauseButton.click();
+
+        return;
+
+    }
+
+    if (event.code === "ArrowRight") {
+
+        event.preventDefault();
+
+        this.timer.stop();
+
+        this.state.isPaused = false;
+
+        pauseButton.textContent = "⏸ 一時停止";
+
+        this.state.currentIndex++;
+
+        this.nextImage();
+
+        return;
+
+    }
+
+    if (event.code === "ArrowLeft") {
+
+        event.preventDefault();
+
+        if (this.state.currentIndex <= 1) {
+
+            return;
+
+        }
+
+        this.timer.stop();
+
+        this.state.isPaused = false;
+
+        pauseButton.textContent = "⏸ 一時停止";
+
+        this.state.currentIndex--;
+
+        this.nextImage();
+
+    }
+
+}
+
 nextImage() {
 
     if (this.state.currentIndex > this.state.count) {
@@ -171,7 +245,19 @@ nextImage() {
 
     }
 
-   const image = this.imageManager.getRandomImage();
+   const historyIndex =
+    this.state.currentIndex - 1;
+
+let image =
+    this.imageHistory[historyIndex];
+
+if (!image) {
+
+    image = this.imageManager.getRandomImage();
+
+    this.imageHistory[historyIndex] = image;
+
+}
 
 this.ui.updateImage(image);
 
