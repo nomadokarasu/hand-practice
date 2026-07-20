@@ -37,4 +37,36 @@ export class Timer {
 
     }
 
+    pause() {
+
+    clearInterval(this.interval);
+
+}
+
+resume(onTick, onFinish) {
+
+    this.interval = setInterval(() => {
+
+        this.time -= 0.1;
+
+        if (this.time <= 0) {
+
+            clearInterval(this.interval);
+
+            this.time = 0;
+
+            onTick(this.time);
+
+            onFinish();
+
+            return;
+
+        }
+
+        onTick(Number(this.time.toFixed(1)));
+
+    }, 100);
+
+}
+
 }

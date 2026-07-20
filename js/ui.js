@@ -16,6 +16,12 @@ export class UI {
 
     this.app.innerHTML = practiceView();
 
+    this.updateImage(imagePath);
+
+}
+
+updateImage(imagePath) {
+
     document.getElementById("practiceImage").src = imagePath;
 
 }
@@ -26,8 +32,17 @@ updateTimer(time) {
 
 }
 
-    showFinish() {
-        this.app.innerHTML = finishView();
-    }
+updateCounter(current, total) {
+
+    document.querySelector(".counter").textContent =
+        `${current} / ${total}`;
+
+}
+
+showFinish() {
+
+    this.app.innerHTML = finishView();
+
+}
 
 }

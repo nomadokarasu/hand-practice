@@ -5,7 +5,7 @@ export class State {
         this.seconds = 30;
         this.count = 20;
 
-        this.currentIndex = 0;
+        this.currentIndex = 1;
 
         this.currentImage = null;
 

@@ -33,7 +33,7 @@ export function practiceView() {
 
             <p class="counter">
 
-                1 / 20
+                0 / 0
 
             </p>
 
