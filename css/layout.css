@@ -128,6 +128,16 @@ button{
 
     position: absolute;
 
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.75);
+
     z-index: 10;
 
     font-size: 96px;
@@ -137,5 +147,11 @@ button{
     color: white;
 
     text-shadow: 0 0 12px black;
+
+}
+
+.countdown[hidden] {
+
+    display: none;
 
 }
