@@ -14,35 +14,44 @@ export class UI {
 
     showPractice(imagePath) {
 
-    this.app.innerHTML = practiceView();
+        this.app.innerHTML = practiceView();
 
-    this.updateImage(imagePath);
+        this.updateImage(imagePath);
 
-}
+    }
 
-updateImage(imagePath) {
+    updateImage(imagePath) {
 
-    document.getElementById("practiceImage").src = imagePath;
+        document.getElementById("practiceImage").src = imagePath;
 
-}
+    }
 
-updateTimer(time) {
+    updateTimer(time) {
 
-    document.querySelector(".timer span").textContent = time.toFixed(1);
+        document.querySelector(".timer span").textContent = time.toFixed(1);
 
-}
+    }
 
-updateCounter(current, total) {
+    updateCounter(current, total) {
 
-    document.querySelector(".counter").textContent =
-        `${current} / ${total}`;
+        document.querySelector(".counter").textContent =
+            `${current} / ${total}`;
 
-}
+    }
 
-showFinish() {
+    updateProgress(current, total) {
 
-    this.app.innerHTML = finishView();
+        const percent = (current / total) * 100;
 
-}
+        document.querySelector(".progress-bar").style.width =
+            `${percent}%`;
+
+    }
+
+    showFinish() {
+
+        this.app.innerHTML = finishView();
+
+    }
 
 }
