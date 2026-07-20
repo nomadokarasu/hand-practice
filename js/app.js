@@ -89,16 +89,11 @@ this.ui.updateProgress(
     this.state.count
 );
 
-const practiceImage =
-    document.getElementById("practiceImage");
-
 const countdown =
     document.getElementById("countdown");
 
 const pauseButton =
     document.getElementById("pauseButton");
-
-practiceImage.hidden = true;
 
 countdown.hidden = false;
 
@@ -130,13 +125,11 @@ const countdownTimer = setInterval(() => {
 
     clearInterval(countdownTimer);
 
-    countdown.hidden = true;
+countdown.hidden = true;
 
-    practiceImage.hidden = false;
+pauseButton.disabled = false;
 
-    pauseButton.disabled = false;
-
-    this.timer.start(
+this.timer.start(
 
         this.state.seconds,
 
