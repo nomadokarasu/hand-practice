@@ -69,4 +69,14 @@ resume(onTick, onFinish) {
 
 }
 
+stop() {
+
+    clearInterval(this.interval);
+
+    this.interval = null;
+
+    this.time = 0;
+
+}
+
 }
