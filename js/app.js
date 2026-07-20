@@ -20,8 +20,34 @@ class App {
 
     }
 
+    showHome() {
+
+    this.timer.stop();
+
+    this.state.isPaused = false;
+
+    this.ui.showHome();
+
+    document
+        .getElementById("startButton")
+        .addEventListener("click", () => {
+
+            this.state.seconds =
+                Number(document.getElementById("seconds").value);
+
+            this.state.count =
+                Number(document.getElementById("count").value);
+
+            this.startPractice();
+
+        });
+
+}
+
     
     startPractice() {
+
+    this.timer.stop();
 
     this.state.currentIndex = 1;
 
@@ -79,6 +105,10 @@ document
     .getElementById("backButton")
     .addEventListener("click", () => {
 
+        this.timer.stop();
+
+        this.state.isPaused = false;
+
         this.showHome();
 
     });
@@ -123,16 +153,6 @@ document
 
     });
 
-document
-    .getElementById("finishButton")
-
-    document
-        .getElementById("backButton")
-        .addEventListener("click", () => {
-
-            this.showHome();
-
-        });
 
 }
 
@@ -180,7 +200,11 @@ this.ui.updateCounter(
 
     showFinish() {
 
-        this.ui.showFinish();
+    this.timer.stop();
+
+    this.state.isPaused = false;
+
+    this.ui.showFinish();
 
         document
     .getElementById("retryButton")
@@ -191,12 +215,13 @@ this.ui.updateCounter(
     });
 
         document
-            .getElementById("homeButton")
-            .addEventListener("click", () => {
+    .getElementById("homeButton")
+    .addEventListener("click", () => {
 
-                this.showHome();
+        this.showHome();
 
-            });
+    });
+            
 
     }
 
