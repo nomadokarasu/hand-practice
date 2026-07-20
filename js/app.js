@@ -73,6 +73,11 @@ this.ui.updateCounter(
     this.state.count
 );
 
+this.ui.updateProgress(
+    this.state.currentIndex,
+    this.state.count
+);
+
 this.timer.start(
 
     this.state.seconds,
@@ -171,6 +176,11 @@ nextImage() {
 this.ui.updateImage(image);
 
 this.ui.updateCounter(
+    this.state.currentIndex,
+    this.state.count
+);
+
+this.ui.updateProgress(
     this.state.currentIndex,
     this.state.count
 );
