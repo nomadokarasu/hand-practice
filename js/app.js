@@ -269,27 +269,25 @@ handleKeydown(event) {
 
     }
 
-    if (event.code === "ArrowLeft") {
+   if (event.code === "ArrowLeft") {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        if (this.state.currentIndex <= 1) {
+    this.timer.stop();
 
-            return;
+    this.state.isPaused = false;
 
-        }
+    pauseButton.textContent = "⏸ 一時停止";
 
-        this.timer.stop();
-
-        this.state.isPaused = false;
-
-        pauseButton.textContent = "⏸ 一時停止";
+    if (this.state.currentIndex > 1) {
 
         this.state.currentIndex--;
 
-        this.nextImage();
-
     }
+
+    this.nextImage();
+
+}
 
 }
 
