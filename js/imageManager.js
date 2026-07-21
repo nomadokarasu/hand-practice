@@ -3,37 +3,57 @@ export class ImageManager {
     constructor() {
 
         this.images = [];
-        this.lastIndex = -1;
+        this.deck = [];
+        this.currentIndex = 0;
 
     }
 
     async load() {
 
+        if (this.images.length > 0) {
+
+            return;
+
+        }
+
         const response = await fetch("./data/images.json");
 
         this.images = await response.json();
+
+        this.shuffleDeck();
+
+    }
+
+    shuffleDeck() {
+
+        this.deck = [...this.images];
+
+        for (let i = this.deck.length - 1; i > 0; i--) {
+
+            const j = Math.floor(Math.random() * (i + 1));
+
+            [this.deck[i], this.deck[j]] =
+                [this.deck[j], this.deck[i]];
+
+        }
+
+        this.currentIndex = 0;
 
     }
 
     getRandomImage() {
 
-        if (this.images.length === 1) {
+        if (this.currentIndex >= this.deck.length) {
 
-            return "./images/hands/" + this.images[0];
+            this.shuffleDeck();
 
         }
 
-        let index;
+        const image = this.deck[this.currentIndex];
 
-        do {
+        this.currentIndex++;
 
-            index = Math.floor(Math.random() * this.images.length);
-
-        } while (index === this.lastIndex);
-
-        this.lastIndex = index;
-
-        return "./images/hands/" + this.images[index];
+        return "./images/hands/" + image;
 
     }
 
