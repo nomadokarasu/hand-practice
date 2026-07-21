@@ -47,6 +47,16 @@ HandPractice用の教材を作成するツールです。
     </strong>
 </p>
 
+<h2>
+    出力予定
+</h2>
+
+<p id="outputPreviewMessage">
+    元画像フォルダを選択すると、変換後のファイル名が表示されます。
+</p>
+
+<ul id="outputPreview"></ul>
+
 <script>
 
 const filesInput =
@@ -61,7 +71,54 @@ const prefixInput =
 const fileNameExample =
     document.getElementById("fileNameExample");
 
+const outputPreviewMessage =
+    document.getElementById("outputPreviewMessage");
+
+const outputPreview =
+    document.getElementById("outputPreview");
+
 let selectedImages = [];
+
+function updateOutputPreview() {
+
+    outputPreview.innerHTML = "";
+
+    if (selectedImages.length === 0) {
+
+        outputPreviewMessage.textContent =
+            "元画像フォルダを選択すると、変換後のファイル名が表示されます。";
+
+        return;
+
+    }
+
+    const prefix =
+        prefixInput.value.trim() || "hand";
+
+    outputPreviewMessage.textContent =
+        `${selectedImages.length}枚の出力予定です。`;
+
+    selectedImages.forEach(
+        (file, index) => {
+
+            const number =
+                String(index + 1).padStart(3, "0");
+
+            const outputName =
+                `${prefix}${number}.webp`;
+
+            const listItem =
+                document.createElement("li");
+
+            listItem.textContent =
+                `${file.name} → ${outputName}`;
+
+            outputPreview.appendChild(listItem);
+
+        }
+    );
+
+}
 
 filesInput.addEventListener(
     "change",
@@ -95,17 +152,21 @@ filesInput.addEventListener(
 
         if (count === 0) {
 
-            fileCount.textContent =
-                "選択したフォルダに画像がありません。";
+    fileCount.textContent =
+        "選択したフォルダに画像がありません。";
 
-            return;
+    updateOutputPreview();
 
-        }
+    return;
 
-        fileCount.textContent =
-            `${count}枚の画像を読み込みました。`;
+}
 
-    }
+fileCount.textContent =
+    `${count}枚の画像を読み込みました。`;
+
+updateOutputPreview();
+
+}
 );
 
 prefixInput.addEventListener(
@@ -120,12 +181,16 @@ prefixInput.addEventListener(
             fileNameExample.textContent =
                 "001.webp";
 
+            updateOutputPreview();
+
             return;
 
         }
 
         fileNameExample.textContent =
             `${prefix}001.webp`;
+
+        updateOutputPreview();
 
     }
 );
