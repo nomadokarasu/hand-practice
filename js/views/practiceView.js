@@ -48,11 +48,6 @@ export function practiceView() {
 
             </p>
 
-            <button id="finishButton">
-
-                （開発用）終了画面へ
-
-            </button>
 
         </main>
     `;
