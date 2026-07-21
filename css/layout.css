@@ -175,3 +175,21 @@ button{
     display: none;
 
 }
+
+.timer {
+
+    margin: 20px 0 12px;
+
+    text-align: center;
+
+}
+
+.timer span {
+
+    font-size: 64px;
+
+    font-weight: bold;
+
+    line-height: 1;
+
+}
