@@ -15,18 +15,19 @@ HandPractice用の教材を作成するツールです。
 </p>
 
 <label for="files">
-    変換する画像を選択
+    元画像フォルダを選択
 </label>
 
 <input
     type="file"
     id="files"
+    webkitdirectory
     multiple
-    accept=".jpg,.jpeg,.png,.gif,image/jpeg,image/png,image/gif"
+    accept=".jpg,.jpeg,.png,.gif,.webp,image/jpeg,image/png,image/gif,image/webp"
 >
 
 <p id="fileCount">
-    画像はまだ選択されていません。
+    元画像フォルダはまだ選択されていません。
 </p>
 
 <label for="prefix">
@@ -69,15 +70,15 @@ filesInput.addEventListener(
 
         if (count === 0) {
 
-            fileCount.textContent =
-                "画像はまだ選択されていません。";
+    fileCount.textContent =
+        "元画像フォルダはまだ選択されていません。";
 
-            return;
+    return;
 
-        }
+}
 
-        fileCount.textContent =
-            `${count}枚の画像を選択しました。`;
+fileCount.textContent =
+    `${count}個のファイルが入ったフォルダを選択しました。`;
 
     }
 );
