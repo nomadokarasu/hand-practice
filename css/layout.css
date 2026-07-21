@@ -88,7 +88,7 @@ button{
 
     width: 100%;
 
-    height: 12px;
+    height: clamp(8px, 1.5vh, 12px);
 
     background: #555;
 
@@ -96,7 +96,7 @@ button{
 
     overflow: hidden;
 
-    margin: 20px 0;
+    margin: 0;
 
 }
 
@@ -112,7 +112,58 @@ button{
 
 }
 
+.practice-screen {
+
+    width: min(100%, 900px);
+
+    height: 100vh;
+
+    height: 100dvh;
+
+    max-width: 900px;
+
+    padding: clamp(8px, 2vh, 20px);
+
+    box-sizing: border-box;
+
+    display: grid;
+
+    grid-template-rows:
+        auto
+        minmax(0, 1fr)
+        auto
+        auto
+        auto;
+
+    gap: clamp(4px, 1vh, 10px);
+
+    overflow: hidden;
+
+}
+
+.practice-screen .top-bar {
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+.practice-screen .top-bar button {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: clamp(8px, 1.5vh, 14px);
+
+    font-size: clamp(14px, 3.5vw, 20px);
+
+}
+
 .image-area {
+
+    min-height: 0;
 
     display: flex;
 
@@ -120,13 +171,20 @@ button{
 
     align-items: center;
 
+    overflow: hidden;
+
 }
 
 .image-wrapper {
 
     position: relative;
 
-    width: 100%;
+    width: min(
+        100%,
+        calc(100dvh - 210px)
+    );
+
+    max-height: 100%;
 
     aspect-ratio: 1 / 1;
 
@@ -178,18 +236,32 @@ button{
 
 .timer {
 
-    margin: 20px 0 12px;
+    margin: 0;
 
     text-align: center;
+
+    line-height: 1;
 
 }
 
 .timer span {
 
-    font-size: 64px;
+    font-size: clamp(40px, 8vh, 64px);
 
     font-weight: bold;
 
     line-height: 1;
+
+}
+
+.counter {
+
+    margin: 0;
+
+    text-align: center;
+
+    font-size: clamp(16px, 2.5vh, 22px);
+
+    line-height: 1.2;
 
 }
