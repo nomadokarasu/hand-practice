@@ -1,6 +1,6 @@
 export function practiceView() {
     return `
-        <main class="container">
+        <main class="container practice-screen">
 
             <div class="top-bar">
                 <button id="backButton">← 設定へ戻る</button>
