@@ -29,6 +29,23 @@ HandPractice用の教材を作成するツールです。
     画像はまだ選択されていません。
 </p>
 
+<label for="prefix">
+    ファイル名
+</label>
+
+<input
+    type="text"
+    id="prefix"
+    value="hand"
+>
+
+<p>
+    出力例：
+    <strong id="fileNameExample">
+        hand001.webp
+    </strong>
+</p>
+
 <script>
 
 const filesInput =
@@ -36,6 +53,12 @@ const filesInput =
 
 const fileCount =
     document.getElementById("fileCount");
+
+const prefixInput =
+    document.getElementById("prefix");
+
+const fileNameExample =
+    document.getElementById("fileNameExample");
 
 filesInput.addEventListener(
     "change",
@@ -55,6 +78,28 @@ filesInput.addEventListener(
 
         fileCount.textContent =
             `${count}枚の画像を選択しました。`;
+
+    }
+);
+
+prefixInput.addEventListener(
+    "input",
+    () => {
+
+        const prefix =
+            prefixInput.value.trim();
+
+        if (!prefix) {
+
+            fileNameExample.textContent =
+                "001.webp";
+
+            return;
+
+        }
+
+        fileNameExample.textContent =
+            `${prefix}001.webp`;
 
     }
 );
