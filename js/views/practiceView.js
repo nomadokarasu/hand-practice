@@ -28,19 +28,17 @@ export function practiceView() {
 
             </section>
 
+                        <p class="timer">
+
+                <span>30.0</span>
+
+            </p>
+
             <div class="progress">
 
                 <div class="progress-bar"></div>
 
             </div>
-
-            <p class="timer">
-
-                残り時間
-                <br>
-                <span>30.0</span>
-
-            </p>
 
             <p class="counter">
 
