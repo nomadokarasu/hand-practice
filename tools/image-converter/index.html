@@ -61,24 +61,49 @@ const prefixInput =
 const fileNameExample =
     document.getElementById("fileNameExample");
 
+let selectedImages = [];
+
 filesInput.addEventListener(
     "change",
     () => {
 
+        const files =
+            Array.from(filesInput.files);
+
+        selectedImages =
+            files
+                .filter((file) => {
+
+                    return file.type.startsWith("image/");
+
+                })
+                .sort((fileA, fileB) => {
+
+                    return fileA.name.localeCompare(
+                        fileB.name,
+                        "ja",
+                        {
+                            numeric: true,
+                            sensitivity: "base"
+                        }
+                    );
+
+                });
+
         const count =
-            filesInput.files.length;
+            selectedImages.length;
 
         if (count === 0) {
 
-    fileCount.textContent =
-        "元画像フォルダはまだ選択されていません。";
+            fileCount.textContent =
+                "選択したフォルダに画像がありません。";
 
-    return;
+            return;
 
-}
+        }
 
-fileCount.textContent =
-    `${count}個のファイルが入ったフォルダを選択しました。`;
+        fileCount.textContent =
+            `${count}枚の画像を読み込みました。`;
 
     }
 );
