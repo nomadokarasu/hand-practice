@@ -79,6 +79,10 @@ this.imageHistory[0] = image;
 
 this.ui.showPractice(image);
 
+this.ui.updateTimer(
+    this.state.seconds
+);
+
 this.ui.updateCounter(
     this.state.currentIndex,
     this.state.count
