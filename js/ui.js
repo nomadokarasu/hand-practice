@@ -28,9 +28,21 @@ export class UI {
 
     updateTimer(time) {
 
-        document.querySelector(".timer span").textContent = time.toFixed(1);
+    const totalSeconds = Math.max(0, Math.ceil(time));
 
-    }
+    const hours =
+        Math.floor(totalSeconds / 3600);
+
+    const minutes =
+        Math.floor((totalSeconds % 3600) / 60);
+
+    const seconds =
+        totalSeconds % 60;
+
+    document.querySelector(".timer span").textContent =
+        `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+}
 
     updateCounter(current, total) {
 
