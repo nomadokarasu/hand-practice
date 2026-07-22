@@ -231,12 +231,36 @@ async function convertImage(
                 result.fileSize / 1024
             );
 
-        console.log(
-            `変換完了: ${outputName} ` +
-            `（品質${result.quality}・${fileSizeKilobytes}KB）`
-        );
+       console.log(
+    `変換完了: ${outputName} ` +
+    `（品質${result.quality}・${fileSizeKilobytes}KB）`
+);
 
-    }
+}
+
+const imageList =
+    sourceImages.map((_, index) => {
+
+        const number =
+            String(index + 1).padStart(3, "0");
+
+        return `hand${number}.webp`;
+
+    });
+
+fs.writeFileSync(
+    imagesJsonPath,
+    JSON.stringify(
+        imageList,
+        null,
+        2
+    ) + "\n"
+);
+
+console.log("");
+console.log(
+    `${imagesJsonPath} を更新しました。`
+);
 
 })().catch((error) => {
 
