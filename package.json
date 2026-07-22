@@ -4,9 +4,9 @@
   "description": "",
   "main": "service-worker.js",
   "scripts": {
-  "update-images": "node scripts/generateImagesJson.js",
-  "test": "echo \"Error: no test specified\" && exit 1"
-},
+    "update-images": "node scripts/generateImagesJson.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nomadokarasu/hand-practice.git"
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/nomadokarasu/hand-practice/issues"
   },
-  "homepage": "https://github.com/nomadokarasu/hand-practice#readme"
+  "homepage": "https://github.com/nomadokarasu/hand-practice#readme",
+  "dependencies": {
+    "sharp": "^0.35.3"
+  }
 }

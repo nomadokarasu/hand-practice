@@ -10,3 +10,6 @@ Desktop.ini
 
 # Logs
 *.log
+
+# Node.js
+node_modules/
