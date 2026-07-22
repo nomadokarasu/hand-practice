@@ -78,6 +78,8 @@ HandPractice用の教材を作成するツールです。
     変換開始
 </button>
 
+<p id="progressMessage"></p>
+
 <script>
 
 const filesInput =
@@ -94,6 +96,12 @@ const fileNameExample =
 
 const outputPreviewMessage =
     document.getElementById("outputPreviewMessage");
+
+const convertButton =
+    document.getElementById("convertButton");
+
+const progressMessage =
+    document.getElementById("progressMessage");
 
 let selectedImages = [];
 
@@ -208,6 +216,25 @@ prefixInput.addEventListener(
             `${prefix}001.webp`;
 
         updateOutputPreview();
+
+    }
+);
+
+convertButton.addEventListener(
+    "click",
+    () => {
+
+        if (selectedImages.length === 0) {
+
+            progressMessage.textContent =
+                "先に元画像フォルダを選択してください。";
+
+            return;
+
+        }
+
+        progressMessage.textContent =
+            `変換中... 0 / ${selectedImages.length}枚`;
 
     }
 );
