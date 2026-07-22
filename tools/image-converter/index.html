@@ -427,6 +427,27 @@ for (const image of convertedImages) {
 
 }
 
+const imagePaths =
+    convertedImages.map(
+        (image) => {
+
+            return `images/hands/${image.name}`;
+
+        }
+    );
+
+const dataFolder =
+    zip.folder("data");
+
+dataFolder.file(
+    "images.json",
+    JSON.stringify(
+        imagePaths,
+        null,
+        2
+    )
+);
+
 progressMessage.textContent =
     "ZIPを作成しています...";
 
