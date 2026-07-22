@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const sharp = require("sharp");
 
 const projectRoot =
     path.resolve(__dirname, "..");
@@ -117,9 +118,29 @@ try {
     );
 
     console.log("");
-    console.log(
-        `出力先：${outputDirectory}`
-    );
+    console.log(`出力先: ${outputDirectory}`);
+
+const firstImage = sourceImages[0];
+
+const inputPath = path.join(sourceDirectory, firstImage);
+const outputPath = path.join(outputDirectory, "hand001.webp");
+
+(async () => {
+  await sharp(inputPath)
+    .resize({
+      width: 1400,
+      height: 1400,
+      fit: "inside",
+      withoutEnlargement: true,
+    })
+    .webp({
+      quality: 80,
+    })
+    .toFile(outputPath);
+
+  console.log("変換完了:");
+  console.log(outputPath);
+})();
 
 } catch (error) {
 
