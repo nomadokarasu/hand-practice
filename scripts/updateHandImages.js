@@ -76,18 +76,50 @@ try {
     const sourceImages =
         getSourceImages();
 
+    if (sourceImages.length === 0) {
+
+        throw new Error(
+            "source-imagesフォルダに画像がありません。"
+        );
+
+    }
+
+    fs.mkdirSync(
+        outputDirectory,
+        {
+            recursive: true
+        }
+    );
+
     console.log("HandPractice直接更新ツール");
     console.log("");
     console.log(
         `${sourceImages.length}枚の画像を読み込みました。`
     );
     console.log("");
+    console.log("出力予定");
+    console.log("");
 
-    for (const fileName of sourceImages) {
+    sourceImages.forEach(
+        (fileName, index) => {
 
-        console.log(fileName);
+            const number =
+                String(index + 1).padStart(3, "0");
 
-    }
+            const outputName =
+                `hand${number}.webp`;
+
+            console.log(
+                `${fileName} → ${outputName}`
+            );
+
+        }
+    );
+
+    console.log("");
+    console.log(
+        `出力先：${outputDirectory}`
+    );
 
 } catch (error) {
 
