@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 
 const projectRoot =
@@ -12,11 +13,85 @@ const outputDirectory =
 const imagesJsonPath =
     path.join(projectRoot, "data", "images.json");
 
-console.log("HandPractice直接更新ツール");
-console.log("");
-console.log(`プロジェクト：${projectRoot}`);
-console.log(`元画像：${sourceDirectory}`);
-console.log(`出力先：${outputDirectory}`);
-console.log(`JSON：${imagesJsonPath}`);
-console.log("");
-console.log("準備ができました。");
+const supportedExtensions =
+    new Set([
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".gif",
+        ".webp"
+    ]);
+
+function compareFileNames(fileA, fileB) {
+
+    return fileA.localeCompare(
+        fileB,
+        "ja",
+        {
+            numeric: true,
+            sensitivity: "base"
+        }
+    );
+
+}
+
+function getSourceImages() {
+
+    if (!fs.existsSync(sourceDirectory)) {
+
+        throw new Error(
+            "source-imagesフォルダが見つかりません。"
+        );
+
+    }
+
+    return fs
+        .readdirSync(
+            sourceDirectory,
+            {
+                withFileTypes: true
+            }
+        )
+        .filter((entry) => {
+
+            if (!entry.isFile()) {
+
+                return false;
+
+            }
+
+            const extension =
+                path.extname(entry.name).toLowerCase();
+
+            return supportedExtensions.has(extension);
+
+        })
+        .map((entry) => entry.name)
+        .sort(compareFileNames);
+
+}
+
+try {
+
+    const sourceImages =
+        getSourceImages();
+
+    console.log("HandPractice直接更新ツール");
+    console.log("");
+    console.log(
+        `${sourceImages.length}枚の画像を読み込みました。`
+    );
+    console.log("");
+
+    for (const fileName of sourceImages) {
+
+        console.log(fileName);
+
+    }
+
+} catch (error) {
+
+    console.error(error.message);
+    process.exitCode = 1;
+
+}
