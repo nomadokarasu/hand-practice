@@ -412,8 +412,47 @@ convertButton.addEventListener(
 
             }
 
-            progressMessage.textContent =
-                `${convertedImages.length}枚の変換が完了しました。`;
+            const zip =
+    new JSZip();
+
+const handsFolder =
+    zip.folder("images")?.folder("hands");
+
+for (const image of convertedImages) {
+
+    handsFolder.file(
+        image.name,
+        image.blob
+    );
+
+}
+
+progressMessage.textContent =
+    "ZIPを作成しています...";
+
+const zipBlob =
+    await zip.generateAsync({
+        type: "blob"
+    });
+
+const url =
+    URL.createObjectURL(zipBlob);
+
+const link =
+    document.createElement("a");
+
+link.href =
+    url;
+
+link.download =
+    "handpractice-images.zip";
+
+link.click();
+
+URL.revokeObjectURL(url);
+
+progressMessage.textContent =
+    `${convertedImages.length}枚の変換が完了しました。`;
 
         } catch (error) {
 
