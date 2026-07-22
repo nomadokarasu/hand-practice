@@ -52,10 +52,8 @@ HandPractice用の教材を作成するツールです。
 </h2>
 
 <p id="outputPreviewMessage">
-    元画像フォルダを選択すると、変換後のファイル名が表示されます。
+    元画像フォルダを選択すると、出力範囲が表示されます。
 </p>
-
-<ul id="outputPreview"></ul>
 
 <script>
 
@@ -74,19 +72,14 @@ const fileNameExample =
 const outputPreviewMessage =
     document.getElementById("outputPreviewMessage");
 
-const outputPreview =
-    document.getElementById("outputPreview");
-
 let selectedImages = [];
 
 function updateOutputPreview() {
 
-    outputPreview.innerHTML = "";
-
     if (selectedImages.length === 0) {
 
         outputPreviewMessage.textContent =
-            "元画像フォルダを選択すると、変換後のファイル名が表示されます。";
+            "元画像フォルダを選択すると、出力範囲が表示されます。";
 
         return;
 
@@ -95,28 +88,29 @@ function updateOutputPreview() {
     const prefix =
         prefixInput.value.trim() || "hand";
 
+    const firstNumber =
+        String(1).padStart(3, "0");
+
+    const lastNumber =
+        String(selectedImages.length).padStart(3, "0");
+
+    const firstFileName =
+        `${prefix}${firstNumber}.webp`;
+
+    const lastFileName =
+        `${prefix}${lastNumber}.webp`;
+
+    if (selectedImages.length === 1) {
+
+        outputPreviewMessage.textContent =
+            firstFileName;
+
+        return;
+
+    }
+
     outputPreviewMessage.textContent =
-        `${selectedImages.length}枚の出力予定です。`;
-
-    selectedImages.forEach(
-        (file, index) => {
-
-            const number =
-                String(index + 1).padStart(3, "0");
-
-            const outputName =
-                `${prefix}${number}.webp`;
-
-            const listItem =
-                document.createElement("li");
-
-            listItem.textContent =
-                `${file.name} → ${outputName}`;
-
-            outputPreview.appendChild(listItem);
-
-        }
-    );
+        `${firstFileName} ～ ${lastFileName}`;
 
 }
 
