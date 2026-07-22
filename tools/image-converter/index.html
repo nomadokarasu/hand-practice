@@ -17,6 +17,23 @@
 HandPractice用の教材を作成するツールです。
 </p>
 
+<label>
+    HandPracticeフォルダ
+</label>
+
+<br>
+
+<button
+    type="button"
+    id="selectProjectButton"
+>
+    フォルダを選択
+</button>
+
+<p id="projectStatus">
+    未選択
+</p>
+
 <label for="files">
     元画像フォルダを選択
 </label>
@@ -78,7 +95,7 @@ HandPractice用の教材を作成するツールです。
     type="button"
     id="convertButton"
 >
-    変換開始
+    更新開始
 </button>
 
 <p id="progressMessage"></p>
@@ -100,11 +117,19 @@ const fileNameExample =
 const outputPreviewMessage =
     document.getElementById("outputPreviewMessage");
 
+const selectProjectButton =
+    document.getElementById("selectProjectButton");
+
+const projectStatus =
+    document.getElementById("projectStatus");
+
 const convertButton =
     document.getElementById("convertButton");
 
 const progressMessage =
     document.getElementById("progressMessage");
+
+let projectDirectoryHandle = null;
 
 let selectedImages = [];
 let convertedImages = [];
@@ -148,6 +173,34 @@ function updateOutputPreview() {
         `${firstFileName} ～ ${lastFileName}`;
 
 }
+
+selectProjectButton.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            projectDirectoryHandle =
+                await window.showDirectoryPicker();
+
+            projectStatus.textContent =
+                projectDirectoryHandle.name;
+
+        } catch (error) {
+
+            if (error.name !== "AbortError") {
+
+                console.error(error);
+
+                projectStatus.textContent =
+                    "フォルダを選択できませんでした。";
+
+            }
+
+        }
+
+    }
+);
 
 filesInput.addEventListener(
     "change",
