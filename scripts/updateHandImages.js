@@ -248,6 +248,39 @@ const imageList =
 
     });
 
+const currentImageNames =
+    new Set(imageList);
+
+const oldImageNames =
+    fs.readdirSync(outputDirectory)
+        .filter((fileName) => {
+
+            const isGeneratedHandImage =
+                /^hand\d+\.webp$/i.test(fileName);
+
+            return (
+                isGeneratedHandImage &&
+                !currentImageNames.has(fileName)
+            );
+
+        });
+
+oldImageNames.forEach((fileName) => {
+
+    const oldImagePath =
+        path.join(
+            outputDirectory,
+            fileName
+        );
+
+    fs.unlinkSync(oldImagePath);
+
+    console.log(
+        `古い画像を削除: ${fileName}`
+    );
+
+});
+
 fs.writeFileSync(
     imagesJsonPath,
     JSON.stringify(
