@@ -120,6 +120,77 @@ try {
     console.log("");
     console.log(`出力先: ${outputDirectory}`);
 
+const maximumFileSize =
+    400 * 1024;
+
+async function convertImage(
+    inputPath,
+    outputPath
+) {
+
+    let minimumQuality = 20;
+    let maximumQuality = 95;
+
+    let bestBuffer = null;
+    let bestQuality = null;
+
+    while (minimumQuality <= maximumQuality) {
+
+        const quality =
+            Math.floor(
+                (minimumQuality + maximumQuality) / 2
+            );
+
+        const convertedBuffer =
+            await sharp(inputPath)
+                .resize({
+                    width: 1400,
+                    height: 1400,
+                    fit: "inside",
+                    withoutEnlargement: true
+                })
+                .webp({
+                    quality
+                })
+                .toBuffer();
+
+        if (
+            convertedBuffer.length <=
+            maximumFileSize
+        ) {
+
+            bestBuffer = convertedBuffer;
+            bestQuality = quality;
+            minimumQuality = quality + 1;
+
+        } else {
+
+            maximumQuality = quality - 1;
+
+        }
+
+    }
+
+    if (bestBuffer === null) {
+
+        throw new Error(
+            `${path.basename(inputPath)}を400KB以下にできませんでした。`
+        );
+
+    }
+
+    fs.writeFileSync(
+        outputPath,
+        bestBuffer
+    );
+
+    return {
+        quality: bestQuality,
+        fileSize: bestBuffer.length
+    };
+
+}
+
 (async () => {
 
     for (
@@ -149,25 +220,30 @@ try {
                 outputName
             );
 
-        await sharp(inputPath)
-            .resize({
-                width: 1400,
-                height: 1400,
-                fit: "inside",
-                withoutEnlargement: true
-            })
-            .webp({
-                quality: 80
-            })
-            .toFile(outputPath);
+        const result =
+            await convertImage(
+                inputPath,
+                outputPath
+            );
+
+        const fileSizeKilobytes =
+            Math.ceil(
+                result.fileSize / 1024
+            );
 
         console.log(
-            `変換完了: ${outputName}`
+            `変換完了: ${outputName} ` +
+            `（品質${result.quality}・${fileSizeKilobytes}KB）`
         );
 
     }
 
-})();
+})().catch((error) => {
+
+    console.error(error.message);
+    process.exitCode = 1;
+
+});
 
 } catch (error) {
 
