@@ -1,3 +1,4 @@
+import { landingView } from "./views/landingView.js";
 import { homeView } from "./views/homeView.js";
 import { practiceView } from "./views/practiceView.js";
 import { finishView } from "./views/finishView.js";
@@ -8,9 +9,13 @@ export class UI {
         this.app = document.getElementById("app");
     }
 
-    showHome() {
-        this.app.innerHTML = homeView();
-    }
+    showLanding() {
+    this.app.innerHTML = landingView();
+}
+
+showHome() {
+    this.app.innerHTML = homeView();
+}
 
     showPractice(imagePath) {
 

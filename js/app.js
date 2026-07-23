@@ -23,11 +23,29 @@ class App {
         this.handleKeydown
     );
 
-    this.showHome();
+    this.showLanding();
 
 }
 
-    showHome() {
+    showLanding() {
+
+    this.timer.stop();
+
+    this.state.isPaused = false;
+
+    this.ui.showLanding();
+
+    document
+        .getElementById("landingStartButton")
+        .addEventListener("click", () => {
+
+            this.showHome();
+
+        });
+
+}
+
+showHome() {
 
     this.timer.stop();
 
@@ -40,10 +58,14 @@ class App {
         .addEventListener("click", () => {
 
             this.state.seconds =
-                Number(document.getElementById("seconds").value);
+                Number(
+                    document.getElementById("seconds").value
+                );
 
             this.state.count =
-                Number(document.getElementById("count").value);
+                Number(
+                    document.getElementById("count").value
+                );
 
             this.startPractice();
 
