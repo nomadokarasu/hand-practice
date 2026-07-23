@@ -29,13 +29,30 @@ export function landingView() {
     <li>✓ 無料で利用できます</li>
 </ul>
 
-                <button
+                                <button
                     class="landing-start-button"
                     id="landingStartButton"
                     type="button"
                 >
                     練習を始める
                 </button>
+
+                <nav
+                    class="landing-links"
+                    aria-label="サイト案内"
+                >
+                    <a href="./guide/">
+                        使い方・利用について
+                    </a>
+
+                    <a href="./privacy/">
+                        プライバシーポリシー
+                    </a>
+
+                    <a href="./contact/">
+                        お問い合わせ
+                    </a>
+                </nav>
 
             </section>
 

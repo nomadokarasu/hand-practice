@@ -430,6 +430,56 @@ button{
 
 }
 
+.landing-links{
+
+    width:100%;
+
+    margin:28px 0 0;
+
+    padding:24px 0 0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:12px;
+
+    border-top:1px solid #dddddd;
+
+}
+
+.landing-links a{
+
+    color:#666666;
+
+    font-size:.85rem;
+
+    line-height:1.5;
+
+    text-decoration:none;
+
+}
+
+.landing-links a:hover{
+
+    color:#222222;
+
+    text-decoration:underline;
+
+}
+
+.landing-links a:focus-visible{
+
+    outline:2px solid #777777;
+
+    outline-offset:3px;
+
+    border-radius:2px;
+
+}
+
 @media (max-width:600px){
 
     .landing-screen{
