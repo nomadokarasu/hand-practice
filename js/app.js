@@ -199,44 +199,281 @@ document
 
 document
     .getElementById("pauseButton")
-    .addEventListener("click", (event) => {
+    .addEventListener("click", () => {
 
-        if (!this.state.isPaused) {
+        this.togglePause();
 
-            this.timer.pause();
+    });
 
-            this.state.isPaused = true;
+this.setupPracticeTouchControls();
 
-            event.target.textContent = "▶ 再開";
 
-        } else {
+}
 
-            this.timer.resume(
+togglePause() {
 
-                (time) => {
+    const pauseButton =
+        document.getElementById("pauseButton");
 
-                    this.ui.updateTimer(time);
+    const countdown =
+        document.getElementById("countdown");
 
-                },
+    if (
+        !pauseButton ||
+        pauseButton.disabled ||
+        (countdown && !countdown.hidden)
+    ) {
 
-                () => {
+        return;
+
+    }
+
+    if (!this.state.isPaused) {
+
+        this.timer.pause();
+
+        this.state.isPaused = true;
+
+        pauseButton.textContent = "▶ 再開";
+
+        return;
+
+    }
+
+    this.timer.resume(
+
+        (time) => {
+
+            this.ui.updateTimer(time);
+
+        },
+
+        () => {
+
+            this.state.currentIndex++;
+
+            this.nextImage();
+
+        }
+
+    );
+
+    this.state.isPaused = false;
+
+    pauseButton.textContent = "⏸ 一時停止";
+
+}
+
+setupPracticeTouchControls() {
+
+    const practiceImage =
+        document.getElementById("practiceImage");
+
+    if (!practiceImage) {
+
+        return;
+
+    }
+
+    const swipeThreshold = 50;
+    const tapThreshold = 12;
+
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let isTouching = false;
+
+    const isCountdownActive = () => {
+
+        const countdown =
+            document.getElementById("countdown");
+
+        return Boolean(
+            countdown &&
+            !countdown.hidden
+        );
+
+    };
+
+    practiceImage.addEventListener(
+        "touchstart",
+        (event) => {
+
+            if (
+                isCountdownActive() ||
+                event.touches.length !== 1
+            ) {
+
+                return;
+
+            }
+
+            const touch = event.touches[0];
+
+            startX = touch.clientX;
+            startY = touch.clientY;
+
+            currentX = startX;
+            currentY = startY;
+
+            isTouching = true;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+    practiceImage.addEventListener(
+        "touchmove",
+        (event) => {
+
+            if (
+                !isTouching ||
+                event.touches.length !== 1
+            ) {
+
+                return;
+
+            }
+
+            const touch = event.touches[0];
+
+            currentX = touch.clientX;
+            currentY = touch.clientY;
+
+            const deltaX =
+                currentX - startX;
+
+            const deltaY =
+                currentY - startY;
+
+            if (
+                Math.abs(deltaX) >
+                Math.abs(deltaY)
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        },
+        {
+            passive: false
+        }
+    );
+
+    practiceImage.addEventListener(
+        "touchend",
+        (event) => {
+
+            if (!isTouching) {
+
+                return;
+
+            }
+
+            isTouching = false;
+
+            if (isCountdownActive()) {
+
+                return;
+
+            }
+
+            const touch =
+                event.changedTouches[0];
+
+            if (touch) {
+
+                currentX = touch.clientX;
+                currentY = touch.clientY;
+
+            }
+
+            const deltaX =
+                currentX - startX;
+
+            const deltaY =
+                currentY - startY;
+
+            const absoluteX =
+                Math.abs(deltaX);
+
+            const absoluteY =
+                Math.abs(deltaY);
+
+            if (
+                absoluteX >= swipeThreshold &&
+                absoluteX > absoluteY
+            ) {
+
+                const pauseButton =
+                    document.getElementById(
+                        "pauseButton"
+                    );
+
+                this.timer.stop();
+
+                this.state.isPaused = false;
+
+                if (pauseButton) {
+
+                    pauseButton.textContent =
+                        "⏸ 一時停止";
+
+                }
+
+                if (deltaX < 0) {
 
                     this.state.currentIndex++;
 
                     this.nextImage();
 
+                    return;
+
                 }
 
-            );
+                if (this.state.currentIndex > 1) {
 
-            this.state.isPaused = false;
+                    this.state.currentIndex--;
 
-            event.target.textContent = "⏸ 一時停止";
+                    this.nextImage();
+
+                } else {
+
+                    this.nextImage();
+
+                }
+
+                return;
+
+            }
+
+            if (
+                absoluteX <= tapThreshold &&
+                absoluteY <= tapThreshold
+            ) {
+
+                this.togglePause();
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+    practiceImage.addEventListener(
+        "touchcancel",
+        () => {
+
+            isTouching = false;
 
         }
-
-    });
-
+    );
 
 }
 
