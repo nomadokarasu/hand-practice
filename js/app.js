@@ -266,7 +266,7 @@ togglePause() {
 
 }
 
-loadAds() {
+loadAds(retryCount = 0) {
 
     if (
         location.hostname === "127.0.0.1" ||
@@ -277,25 +277,67 @@ loadAds() {
 
     }
 
-    const ad =
-        document.querySelector(
-            ".adsbygoogle:not([data-adsbygoogle-status])"
-        );
+    const ad = document.querySelector(
+        ".adsbygoogle:not([data-adsbygoogle-status])"
+    );
 
     if (!ad) {
         return;
     }
 
-    try {
-
-        (window.adsbygoogle =
-            window.adsbygoogle || []).push({});
-
-    } catch (error) {
-
-        console.warn("AdSense:", error);
-
+    if (ad.dataset.adRequestStarted === "true") {
+        return;
     }
+
+    requestAnimationFrame(() => {
+
+        if (!ad.isConnected) {
+            return;
+        }
+
+        const availableWidth =
+            ad.getBoundingClientRect().width;
+
+        if (availableWidth <= 0) {
+
+            if (retryCount < 20) {
+
+                setTimeout(() => {
+
+                    this.loadAds(retryCount + 1);
+
+                }, 100);
+
+                return;
+
+            }
+
+            console.warn(
+                "AdSense: 広告枠の横幅を取得できませんでした。"
+            );
+
+            return;
+
+        }
+
+        ad.dataset.adRequestStarted = "true";
+
+        try {
+
+            (
+                window.adsbygoogle =
+                window.adsbygoogle || []
+            ).push({});
+
+        } catch (error) {
+
+            delete ad.dataset.adRequestStarted;
+
+            console.warn("AdSense:", error);
+
+        }
+
+    });
 
 }
 

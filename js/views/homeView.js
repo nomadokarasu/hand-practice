@@ -49,6 +49,10 @@ export function homeView() {
 
             <section class="ad" aria-label="広告">
 
+    <p class="ad-label">
+        広告
+    </p>
+
     <ins
         class="adsbygoogle"
         style="display:block"

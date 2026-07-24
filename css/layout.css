@@ -66,15 +66,33 @@ button{
 
 }
 
-.ad{
+.ad {
 
-    margin-top:30px;
+    width: 100%;
 
-    border:2px dashed gray;
+    max-width: 728px;
 
-    padding:40px;
+    margin: 32px auto;
 
-    text-align:center;
+    min-height: 120px;
+
+}
+
+.ad-label {
+
+    margin: 0 0 8px;
+
+    font-size: 12px;
+
+    color: #888;
+
+    text-align: center;
+
+}
+
+.adsbygoogle {
+
+    width: 100%;
 
 }
 
