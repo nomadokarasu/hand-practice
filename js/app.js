@@ -53,8 +53,10 @@ showHome() {
 
     this.ui.showHome();
 
-    document
-        .getElementById("startButton")
+this.loadAds();
+
+document
+    .getElementById("startButton")
         .addEventListener("click", () => {
 
             this.state.seconds =
@@ -263,6 +265,40 @@ togglePause() {
     pauseButton.textContent = "⏸ 一時停止";
 
 }
+
+loadAds() {
+
+    if (
+        location.hostname === "127.0.0.1" ||
+        location.hostname === "localhost"
+    ) {
+
+        return;
+
+    }
+
+    const ad =
+        document.querySelector(
+            ".adsbygoogle:not([data-adsbygoogle-status])"
+        );
+
+    if (!ad) {
+        return;
+    }
+
+    try {
+
+        (window.adsbygoogle =
+            window.adsbygoogle || []).push({});
+
+    } catch (error) {
+
+        console.warn("AdSense:", error);
+
+    }
+
+}
+
 
 setupPracticeTouchControls() {
 
@@ -614,7 +650,9 @@ this.ui.updateProgress(
 
     this.ui.showFinish();
 
-        document
+this.loadAds();
+
+document
     .getElementById("retryButton")
     .addEventListener("click", () => {
 

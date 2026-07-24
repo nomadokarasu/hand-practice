@@ -20,11 +20,18 @@ export function finishView() {
 
             </button>
 
-            <section class="ad">
+            <section class="ad" aria-label="広告">
 
-                Advertisement
+    <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-8435618945656642"
+        data-ad-slot="3131521796"
+        data-ad-format="auto"
+        data-full-width-responsive="true">
+    </ins>
 
-            </section>
+</section>
 
         </main>
     `;

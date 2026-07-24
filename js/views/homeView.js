@@ -47,9 +47,18 @@ export function homeView() {
 
             </section>
 
-            <section class="ad">
-                Advertisement
-            </section>
+            <section class="ad" aria-label="広告">
+
+    <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-8435618945656642"
+        data-ad-slot="5757685134"
+        data-ad-format="auto"
+        data-full-width-responsive="true">
+    </ins>
+
+</section>
 
         </main>
     `;
