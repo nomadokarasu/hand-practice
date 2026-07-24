@@ -1,41 +1,49 @@
 export function landingView() {
 
     return `
-        <main class="landing-screen">
+        <div class="landing-page">
 
-            <section class="landing-card">
+            <main class="landing-screen">
 
-                <h1 class="landing-title">
-                    手が描けーる
-                </h1>
+                <section class="landing-card">
 
-                <p class="landing-subtitle">
-                    手が描けるようになるための練習アプリ
-                </p>
+                    <h1 class="landing-title">
+                        手が描けーる
+                    </h1>
 
-                <p class="landing-copy">
-                    「手を描くのって難しいなぁ……」
-                </p>
+                    <p class="landing-subtitle">
+                        手が描けるようになるための練習アプリ
+                    </p>
 
-                <p class="landing-description">
-                    そんな悩みから生まれた、<br>
-                    毎日少しずつ手を描くための練習アプリです。
-                </p>
+                    <p class="landing-copy">
+                        「手を描くのって難しいなぁ……」
+                    </p>
 
-                <ul class="landing-features">
-    <li>✓ 商用利用OK</li>
-    <li>✓ トレースOK</li>
-    <li>✓ クレジット表記不要</li>
-    <li>✓ 無料で利用できます</li>
-</ul>
+                    <p class="landing-description">
+                        そんな悩みから生まれた、<br>
+                        毎日少しずつ手を描くための練習アプリです。
+                    </p>
 
-                                <button
-                    class="landing-start-button"
-                    id="landingStartButton"
-                    type="button"
-                >
-                    練習を始める
-                </button>
+                    <ul class="landing-features">
+                        <li>✓ 商用利用OK</li>
+                        <li>✓ トレースOK</li>
+                        <li>✓ クレジット表記不要</li>
+                        <li>✓ 無料で利用できます</li>
+                    </ul>
+
+                    <button
+                        class="landing-start-button"
+                        id="landingStartButton"
+                        type="button"
+                    >
+                        練習を始める
+                    </button>
+
+                </section>
+
+            </main>
+
+            <footer class="landing-footer">
 
                 <nav
                     class="landing-links"
@@ -54,9 +62,13 @@ export function landingView() {
                     </a>
                 </nav>
 
-            </section>
+                <p class="landing-copyright">
+                    © 2026 JUNOTA
+                </p>
 
-        </main>
+            </footer>
+
+        </div>
     `;
 
 }

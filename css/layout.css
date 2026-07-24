@@ -278,11 +278,21 @@ button{
    Landing Screen
 =========================== */
 
-.landing-screen{
+.landing-page{
 
     min-height:100vh;
 
     min-height:100dvh;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.landing-screen{
+
+    flex:1;
 
     padding:24px;
 
@@ -430,13 +440,21 @@ button{
 
 }
 
-.landing-links{
+.landing-footer{
 
     width:100%;
 
-    margin:28px 0 0;
+    padding:24px;
 
-    padding:24px 0 0;
+    box-sizing:border-box;
+
+    border-top:1px solid #dddddd;
+
+    text-align:center;
+
+}
+
+.landing-links{
 
     display:flex;
 
@@ -444,9 +462,7 @@ button{
 
     align-items:center;
 
-    gap:12px;
-
-    border-top:1px solid #dddddd;
+    gap:10px;
 
 }
 
@@ -479,6 +495,20 @@ button{
     border-radius:2px;
 
 }
+
+.landing-copyright{
+
+    margin:20px 0 0;
+
+    color:#777777;
+
+    font-size:.75rem;
+
+    line-height:1.5;
+
+}
+
+
 
 @media (max-width:600px){
 
