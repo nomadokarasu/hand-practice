@@ -526,6 +526,93 @@ button{
 
 }
 
+.settings-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+
+}
+
+.setting-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+.setting-group label,
+.setting-title {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.setting-group input {
+
+    width: 100%;
+
+}
+
+.situation-settings {
+
+    padding-top: 8px;
+
+}
+
+.situation-options {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    min-height: 40px;
+
+}
+
+.situation-button {
+
+    border: 1px solid #aaa;
+
+    border-radius: 999px;
+
+    padding: 8px 14px;
+
+    background: transparent;
+
+    color: inherit;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+}
+
+.situation-button.is-selected {
+
+    background: #ffffff;
+
+    color: #202124;
+
+    border-color: #ffffff;
+
+}
+
+#startButton {
+
+    margin-top: 8px;
+
+}
+
 
 
 @media (max-width:600px){
@@ -553,5 +640,7 @@ button{
         font-size:1.1rem;
 
     }
+
+    
 
 }

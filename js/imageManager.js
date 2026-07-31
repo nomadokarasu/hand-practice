@@ -9,21 +9,30 @@ export class ImageManager {
 
 }
 
-    async load() {
+    async load(categories = ["simple"]) {
 
-        if (this.images.length > 0) {
+    this.images = [];
 
-            return;
+    for (const category of categories) {
 
-        }
+        const response = await fetch(
+            `./assets/hands/${category}/index.json`
+        );
 
-        const response = await fetch("./data/images.json");
+        const files = await response.json();
 
-        this.images = await response.json();
-
-        this.shuffleDeck();
+        this.images.push(
+            ...files.map(file => ({
+                file,
+                category
+            }))
+        );
 
     }
+
+    this.shuffleDeck();
+
+}
 
     shuffleDeck() {
 
@@ -62,11 +71,17 @@ export class ImageManager {
 
     const image = this.deck[this.currentIndex];
 
-    this.currentIndex++;
+if (!image) {
 
-    this.lastImage = image;
+    return null;
 
-    return "./images/hands/" + image;
+}
+
+this.currentIndex++;
+
+this.lastImage = image;
+
+return `./assets/hands/${image.category}/${image.file}`;
 
 }
 

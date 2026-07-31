@@ -53,25 +53,56 @@ showHome() {
 
     this.ui.showHome();
 
-this.loadAds();
+    this.loadAds();
+
+
+    // シチュエーション選択
+
+    document
+        .querySelectorAll(".situation-button")
+        .forEach((button) => {
+
+            button.addEventListener("click", () => {
+
+                button.classList.toggle("is-selected");
+
+            });
+
+        });
+
+
+    // 練習開始
 
 document
     .getElementById("startButton")
-        .addEventListener("click", () => {
+    .addEventListener("click", () => {
 
-            this.state.seconds =
-                Number(
-                    document.getElementById("seconds").value
-                );
+        this.state.seconds =
+            Number(
+                document.getElementById("seconds").value
+            );
 
-            this.state.count =
-                Number(
-                    document.getElementById("count").value
-                );
+        this.state.count =
+            Number(
+                document.getElementById("count").value
+            );
 
-            this.startPractice();
+        this.state.categories =
+    [
+        ...document.querySelectorAll(
+            ".situation-button.is-selected"
+        )
+    ].map(button => button.dataset.situation);
 
-        });
+if (this.state.categories.length === 0) {
+
+    this.state.categories = ["simple"];
+
+}
+
+        this.startPractice();
+
+    });
 
 }
 
@@ -92,12 +123,24 @@ document
 
     async showPractice() {
 
-    // images.json を読み込む
-    await this.imageManager.load();
+// 選択したシチュエーションを読み込む
+await this.imageManager.load(
+    this.state.categories
+);
 
 
 // 最初の画面を表示
 const image = this.imageManager.getRandomImage();
+
+if (!image) {
+
+    alert("このシチュエーションには画像がありません。");
+
+    this.showHome();
+
+    return;
+
+}
 
 this.imageHistory[0] = image;
 
